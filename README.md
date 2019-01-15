@@ -56,18 +56,30 @@ export default App;
 
 #Props
 
-* `searchData` - accepts Array of Objects or Array of Strings - REQUIRED?
+
+
+Controlled mode:
+
+* `asyncSearch` - accepts a function, passes single value (field value) - REQUIRED
+* `asyncData` - accepts data for rerender -REQUIRED
+* `result` - accepts a callback, passes single value (selection)  - OPTIONAL
+
+Uncontrolled mode:
+
+* `searchData` - accepts Array of Objects or Array of Strings - REQUIRED
 * `searchFunc` - accepts function to use for filter method. Accepts two values for comparison - OPTIONAL
+
+--Array of objects:
+
+* `getFunction` - used with Array of Objects to decide searching value - REQUIRED
+
+* `result` - accepts a callback, passes single value (selection)  - OPTIONAL
+
+Style change:
+
 * `inputStyle` - require object for inline styling, extends style - OPTIONAL
 * `ulStyle` - require object for inline styling, extends style - OPTIONAL
 * `liStyle` - require object for inline styling, extends style - OPTIONAL
-* `getFunction` - used with Array of Objects to decide searching value - REQUIRED?
-* `result` - accepts a callback, passes single value (selection)  - OPTIONAL
-* `asyncSearch` - accepts a function, passes single value (field value) - OPTIONAL
-* `asyncData` - accepts data for rerender - OPTIONAL
-
-
-
 
 
 
