@@ -56,13 +56,13 @@ export default App;
 
 #Props
 
-*`searchData` - accepts Array of Objects or Array of Strings - REQUIRED
-*`searchFunc` - accepts function to use for filter method. Accepts two values for comparison - OPTIONAL
-*`inputStyle` - require object for inline styling, extends style - OPTIONAL
-*`ulStyle` - require object for inline styling, extends style - OPTIONAL
-*`liStyle` - require object for inline styling, extends style - OPTIONAL
-*`getFunction` - used with Array of Objects to decide searching value - REQUIRED?
-*`result` - accepts a callback, passes single value (selection)  - OPTIONAL
+* `searchData` - accepts Array of Objects or Array of Strings - REQUIRED
+* `searchFunc` - accepts function to use for filter method. Accepts two values for comparison - OPTIONAL
+* `inputStyle` - require object for inline styling, extends style - OPTIONAL
+* `ulStyle` - require object for inline styling, extends style - OPTIONAL
+* `liStyle` - require object for inline styling, extends style - OPTIONAL
+* `getFunction` - used with Array of Objects to decide searching value - REQUIRED?
+* `result` - accepts a callback, passes single value (selection)  - OPTIONAL
 
 
 
