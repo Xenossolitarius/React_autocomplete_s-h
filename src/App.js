@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Autocomplete from './Components/Autocomplete'
-import countriesJsonObj from './input/inputDataJson'
-import countriesJsonString from './input/inputDataString'
+import Autocomplete from './Components/Autocomplete';
+import countriesJsonObj from './input/inputDataJson';
+import countriesJsonString from './input/inputDataString';
+import defaultSearchFunc from './Components/helpers';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
         <p></p>
         <Autocomplete
           searchData = {countriesJsonString}
+          searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
         />
       </div>
     );
