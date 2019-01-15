@@ -13,7 +13,8 @@ constructor(props){
 
     const getFunction = this.props.getFunction;
     const searchData = this.props.searchData;
-
+    
+    //use json with get function or array of string
     if(searchData.every(function(i){ return typeof i === "string" })){
         this.state = {
             suggestions: searchData,
@@ -30,26 +31,26 @@ constructor(props){
         }
         
     }else{
-
         throw Error('Wrong data format');
     }
    
 
-   
+   //constructor binding
    this.onType = this.onType.bind(this);
    this.clickSelection = this.clickSelection.bind(this);
    
 }
-
+//filling input field with selection
 clickSelection(suggestion){
   this.setState({value: suggestion})
 }
 
+//filter on type function
 onType(e){
 
   const userInput = e.currentTarget.value;
 
-
+//use default or provided func
   let filteredData;
   const searchFunc = this.props.searchFunc;
   if(this.props.searchFunc === undefined){  

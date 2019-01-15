@@ -1,3 +1,4 @@
+//default search function wrapper
 function defaultSearchFunction (userInput){
     
     return  function(data) {
@@ -5,7 +6,7 @@ function defaultSearchFunction (userInput){
     } 
 
 }
-
+//style combination via spread 
 function combineStyles(mainStyle, propStyle){
 
 

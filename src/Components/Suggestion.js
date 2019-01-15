@@ -9,10 +9,11 @@ class Suggestion extends Component {
   constructor(props){
     super(props);
 
+    //constructor binding
     this.returnSelection = this.returnSelection.bind(this);
   }
  
-
+//wrapper function for lifting states (not binding to event bcs of perfomance issues)
 returnSelection(e){
   this.props.result(this.props.suggestion);
   this.props.clickSelection(this.props.suggestion);

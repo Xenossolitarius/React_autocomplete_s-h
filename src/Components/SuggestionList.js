@@ -5,14 +5,11 @@ import Suggestion from './Suggestion'
 import propTypes from 'prop-types';
 
 
-
+//container/wrapper class
 class SuggestionList extends Component {
  
 
 render(){
-
-
-
   return(
     
 
