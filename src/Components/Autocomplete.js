@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import SuggestionList from './SuggestionList';
 import defaultSearchFunction from './helpers';
+import {inputStyle,mainClass} from './consts';
 
 
 
@@ -10,13 +11,20 @@ constructor(props){
     super(props);
 
 
+   
+
+
     this.state = {
         suggestions: this.props.searchData,
         filtSuggestions: []
     }
+
+
    this.onSingleClick = this.onSingleClick.bind(this);
    this.onType = this.onType.bind(this);
    
+
+
 }
 
 onSingleClick () {
@@ -37,15 +45,9 @@ onType(e){
     filteredData =this.state.suggestions.filter(defaultSearchFunction(userInput));
   }else{
      filteredData = this.state.suggestions.filter(function (data){ return searchFunc(data,userInput)});
- 
-  }
+ }
 
-  //let filteredData =this.state.suggestions.filter(defaultSearchFunc(userInput));
 
-  
-
-  /*const filteredData = this.state.suggestions.filter(suggestion=>suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-  );*/
 
   this.setState({filtSuggestions: filteredData});
   
@@ -53,22 +55,35 @@ onType(e){
 }
 
   render() {
+    let combineInpStyle;
+  
+    if(this.props.inputStyle !== undefined ){
+        combineInpStyle = {...inputStyle, ...this.props.inputStyle};
+        console.log(combineInpStyle);
+    }else{
+        combineInpStyle = inputStyle;
+    }
+
 
     const {onSingleClick,onType} = this;
        
     return (
-      <div className = "autocomplete">
+      <div className = {mainClass}>
         <input
+          className = {mainClass + '-input'}
+          style = {combineInpStyle}
           type="text"
           //onClick = {onSingleClick}
           onChange = {onType}
         />
-        <SuggestionList filteredData={this.state.filtSuggestions} />
+        <SuggestionList 
+        ulStyle={this.props.ulStyle}
+        liStyle={this.props.liStyle}
+         filteredData={this.state.filtSuggestions} />
       </div>
     );
   }
 }
-
 
 
 
