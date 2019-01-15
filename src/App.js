@@ -44,7 +44,6 @@ getResult = (result) => {
        
         <Autocomplete
           searchData = {countriesJsonString}
-          searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
           liStyle ={{background: 'red'}}
           result = {this.getResult}
         />
