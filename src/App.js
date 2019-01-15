@@ -11,14 +11,40 @@ constructor(props){
   super(props);
 
   this.state = {
-    selection1: '',
-    selection2: ''
+    asyncData: []
   }
 }
 
 getResult = (result) => {
   console.log(result);
 }
+
+asyncFunction = (input) => {
+  let newData;
+  console.log(input);
+  function dummyFunction(){
+    return new Promise ((resolve,reject)=>{
+      setTimeout(function(){
+        newData = countriesJsonString.filter((data)=>data.toLowerCase().indexOf(input.toLowerCase()) > -1);
+        resolve();
+      },2000)
+    })
+    
+      
+  
+  }
+
+  dummyFunction()
+  .then(() => this.setState({asyncData: newData}));
+
+
+
+
+
+
+}
+
+
 
 
   render() {
@@ -28,6 +54,8 @@ getResult = (result) => {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <p></p>
+        <p>Sync - JsonObj</p>
         <p></p>
 
 
@@ -41,10 +69,22 @@ getResult = (result) => {
 
 
         <p></p>
+        <p>Sync - JsonString</p>
+        <p></p>
        
         <Autocomplete
           searchData = {countriesJsonString}
           liStyle ={{background: 'red'}}
+          result = {this.getResult}
+        />
+
+        <p></p>
+        <p>Async</p>
+        <p></p>
+       
+        <Autocomplete
+          asyncSearch = {this.asyncFunction}
+          asyncData = {this.state.asyncData}
           result = {this.getResult}
         />
 

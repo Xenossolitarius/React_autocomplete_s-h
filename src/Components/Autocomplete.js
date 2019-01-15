@@ -13,6 +13,22 @@ constructor(props){
 
     const getFunction = this.props.getFunction;
     const searchData = this.props.searchData;
+
+    this.isAsync = false;
+
+    if(searchData === undefined){
+      if(this.props.asyncSearch !== undefined){
+        this.isAsync = true;
+
+        this.state = {
+          suggestions: [],
+          filtSuggestions: [],
+          value: ''
+      }
+      }
+
+
+    }else{
     
     //use json with get function or array of string
     if(searchData.every(function(i){ return typeof i === "string" })){
@@ -33,6 +49,8 @@ constructor(props){
     }else{
         throw Error('Wrong data format');
     }
+
+  }
    
 
    //constructor binding
@@ -43,6 +61,7 @@ constructor(props){
 //filling input field with selection
 clickSelection(suggestion){
   this.setState({value: suggestion})
+  this.setState({filtSuggestions: []})
 }
 
 //filter on type function
@@ -50,6 +69,7 @@ onType(e){
 
   const userInput = e.currentTarget.value;
 
+  if(this.isAsync === false){
 //use default or provided func
   let filteredData;
   const searchFunc = this.props.searchFunc;
@@ -62,10 +82,29 @@ onType(e){
 
 
   this.setState({filtSuggestions: filteredData});
-  this.setState({value: userInput});
+  
+}else{
+
+this.props.asyncSearch(userInput);
+
+
+
+}
+
+this.setState({value: userInput});
   
 
 }
+
+componentDidUpdate(prevProps){
+  if(this.isAsync===true){
+    if(prevProps.asyncData !== this.props.asyncData){
+      this.setState({filtSuggestions: this.props.asyncData});
+    }
+  }
+}
+
+
 
   render() {
 
@@ -95,7 +134,9 @@ onType(e){
 
 //Proptypes
 Autocomplete.propTypes = {
-searchData: propTypes.any.isRequired,
+asyncSearch: propTypes.any,
+asyncData: propTypes.any,
+searchData: propTypes.any,
 searchFunc: propTypes.func,
 inputStyle: propTypes.object,
 ulStyle: propTypes.object,
