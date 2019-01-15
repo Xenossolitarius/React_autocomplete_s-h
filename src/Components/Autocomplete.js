@@ -10,14 +10,29 @@ class Autocomplete extends Component {
 constructor(props){
     super(props);
 
+    const getFunction = this.props.getFunction;
 
+    if(this.props.searchData.every(function(i){ return typeof i === "string" })){
+        this.state = {
+            suggestions: this.props.searchData,
+            filtSuggestions: []
+        }
+        
+    }else if( getFunction !== undefined){
+        
+        this.state ={
+            suggestions: this.props.searchData.map( getFunction),
+            filtSuggestions: []
+        }
+        
+    }else{
+
+        throw Error('Nesto nije uredu');
+    }
    
 
 
-    this.state = {
-        suggestions: this.props.searchData,
-        filtSuggestions: []
-    }
+ 
 
 
    this.onSingleClick = this.onSingleClick.bind(this);
@@ -39,6 +54,9 @@ onSingleClick () {
 onType(e){
   const userInput = e.currentTarget.value;
 
+
+
+
   let filteredData;
   const searchFunc = this.props.searchFunc;
   if(this.props.searchFunc === undefined){
@@ -59,7 +77,6 @@ onType(e){
   
     if(this.props.inputStyle !== undefined ){
         combineInpStyle = {...inputStyle, ...this.props.inputStyle};
-        console.log(combineInpStyle);
     }else{
         combineInpStyle = inputStyle;
     }

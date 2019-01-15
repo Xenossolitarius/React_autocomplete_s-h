@@ -16,10 +16,21 @@ class App extends Component {
         </header>
         <p></p>
         <Autocomplete
-          searchData = {countriesJsonString}
+          searchData = {countriesJsonObj}
           searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
           inputStyle ={{background: 'red'}}
+          getFunction = {(data)=> data['name']}
         />
+        <p></p>
+       
+        <Autocomplete
+          searchData = {countriesJsonString}
+          searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
+          liStyle ={{background: 'red'}}
+        />
+
+
+
       </div>
     );
   }

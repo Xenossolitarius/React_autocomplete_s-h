@@ -1,12 +1,12 @@
  const inputStyle = {
+
     border: '1px solid #999',
     padding: '0.5rem',
     width: '300px'
 }
 
 const ulStyle = {
-   
-        width: '50%',
+
         margin: '0 auto',
         border: '1px solid #999',
         borderTopWidth: '0',
@@ -20,9 +20,11 @@ const ulStyle = {
 }
 
 const liStyle = {
+
     padding: '0.5rem',
     borderBottom: '1px solid #999'
 }
+
 const mainClass = 'autocomplete';
 
 export  {
