@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Autocomplete from './Components/Autocomplete'
+import countriesJsonObj from './input/inputDataJson'
+import countriesJsonString from './input/inputDataString'
 
 class App extends Component {
   render() {
