@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import SuggestionList from './SuggestionList';
 import {defaultSearchFunction,combineStyles} from './helpers';
 import {inputStyle,mainClass} from './consts';
+import propTypes from 'prop-types';
 
 
 
@@ -91,6 +92,17 @@ onType(e){
   }
 }
 
+//Proptypes
+Autocomplete.propTypes = {
+searchData: propTypes.any.isRequired,
+searchFunc: propTypes.func,
+inputStyle: propTypes.object,
+ulStyle: propTypes.object,
+liStyle: propTypes.object,
+getFunction: propTypes.func,
+result: propTypes.func
+
+}
 
 
 export default Autocomplete;

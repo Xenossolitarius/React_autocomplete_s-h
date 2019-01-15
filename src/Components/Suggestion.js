@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {liStyle,mainClass} from './consts';
-import {combineStyles} from './helpers'
+import {combineStyles} from './helpers';
+import propTypes from 'prop-types';
 
 
 
@@ -40,6 +41,14 @@ render(){
     )}
     
   
+  }
+
+  //propTypes
+  Suggestion.propTypes = {
+    suggestion: propTypes.string.isRequired,
+    liStyle: propTypes.object,
+    result: propTypes.func.isRequired,
+    clickSelection: propTypes.func.isRequired
   }
 
 

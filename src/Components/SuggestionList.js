@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {ulStyle,mainClass} from './consts';
 import {combineStyles} from './helpers'
 import Suggestion from './Suggestion'
+import propTypes from 'prop-types';
 
 
 
@@ -48,6 +49,14 @@ render(){
 
 }
 
+//propTypes
+SuggestionList.propTypes = {
+  ulStyle: propTypes.object,
+  liStyle: propTypes.object,
+  filteredData: propTypes.any.isRequired,
+  result: propTypes.func.isRequired,
+  clickSelection: propTypes.func.isRequired
+}
 
 
 export default SuggestionList;
