@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import SuggestionList from './SuggestionList';
-import defaultSearchFunction from './helpers';
+import {defaultSearchFunction,combineStyles} from './helpers';
 import {inputStyle,mainClass} from './consts';
 
 
@@ -11,92 +11,81 @@ constructor(props){
     super(props);
 
     const getFunction = this.props.getFunction;
+    const searchData = this.props.searchData;
 
-    if(this.props.searchData.every(function(i){ return typeof i === "string" })){
+    if(searchData.every(function(i){ return typeof i === "string" })){
         this.state = {
-            suggestions: this.props.searchData,
-            filtSuggestions: []
+            suggestions: searchData,
+            filtSuggestions: [],
+            value: ''
         }
         
     }else if( getFunction !== undefined){
         
         this.state ={
-            suggestions: this.props.searchData.map( getFunction),
-            filtSuggestions: []
+            suggestions: searchData.map(getFunction),
+            filtSuggestions: [],
+            value: ''
         }
         
     }else{
 
-        throw Error('Nesto nije uredu');
+        throw Error('Wrong data format');
     }
    
 
-
- 
-
-
-   this.onSingleClick = this.onSingleClick.bind(this);
-   this.onType = this.onType.bind(this);
    
-
-
+   this.onType = this.onType.bind(this);
+   this.clickSelection = this.clickSelection.bind(this);
+   
 }
 
-onSingleClick () {
-    //show suggestions
-  console.log(this.state.suggestions);
-
+clickSelection(suggestion){
+  this.setState({value: suggestion})
 }
-
-
-
 
 onType(e){
+
   const userInput = e.currentTarget.value;
-
-
 
 
   let filteredData;
   const searchFunc = this.props.searchFunc;
-  if(this.props.searchFunc === undefined){
+  if(this.props.searchFunc === undefined){  
     filteredData =this.state.suggestions.filter(defaultSearchFunction(userInput));
   }else{
-     filteredData = this.state.suggestions.filter(function (data){ return searchFunc(data,userInput)});
- }
+    filteredData = this.state.suggestions.filter(function (data){ return searchFunc(data,userInput)});
+  }
 
 
 
   this.setState({filtSuggestions: filteredData});
+  this.setState({value: userInput});
   
 
 }
 
   render() {
-    let combineInpStyle;
-  
-    if(this.props.inputStyle !== undefined ){
-        combineInpStyle = {...inputStyle, ...this.props.inputStyle};
-    }else{
-        combineInpStyle = inputStyle;
-    }
 
-
-    const {onSingleClick,onType} = this;
+    const {onType} = this;
        
     return (
       <div className = {mainClass}>
         <input
           className = {mainClass + '-input'}
-          style = {combineInpStyle}
+          style = {combineStyles(inputStyle,this.props.inputStyle)}
           type="text"
-          //onClick = {onSingleClick}
+          value={this.state.value}
+    
           onChange = {onType}
         />
         <SuggestionList 
         ulStyle={this.props.ulStyle}
         liStyle={this.props.liStyle}
-         filteredData={this.state.filtSuggestions} />
+        filteredData={this.state.filtSuggestions} 
+        result = {this.props.result}
+        clickSelection = {this.clickSelection}
+         />
       </div>
     );
   }

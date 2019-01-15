@@ -1,50 +1,52 @@
-import React from "react";
-import {ulStyle,liStyle,mainClass} from './consts';
+import React, {Component} from "react";
+import {ulStyle,mainClass} from './consts';
+import {combineStyles} from './helpers'
+import Suggestion from './Suggestion'
 
 
 
-function SuggestionList (props) {
-  let combineUlStyle;
-  let combineLiStyle;
+class SuggestionList extends Component {
+ 
 
-  if(props.ulStyle !== undefined ){
-    combineUlStyle = {...ulStyle, ...props.ulStyle};
-  }else{
-    combineUlStyle = ulStyle;
-  }
+render(){
 
-  if(props.liStyle !== undefined ){
-    combineLiStyle = {...liStyle, ...props.liStyle};
-  }else{
-    combineLiStyle = liStyle;
-  }
 
 
   return(
+    
+
     <ul 
     className={mainClass + '-suggestions'}
-    style = {combineUlStyle}
+    style = {combineStyles(ulStyle,this.props.ulStyle)}
     >
 
-    {props.filteredData.map((suggestion,index)=>{
+    {this.props.filteredData.map((suggestion,index)=>{
        return(
-         <li 
-         className={mainClass + '-suggestion'}
-         style = {combineLiStyle}
+
+         <Suggestion 
+         suggestion = {suggestion}
          key = {index}
-         >
-          {suggestion}
-         </li>
+         liStyle = {this.props.liStyle}
+
+         result = {this.props.result}
+         clickSelection = {this.props.clickSelection}
+         />
+
+
 
        );
 
     })}
     </ul>
+
+
   );
 
    
   
   }
+
+}
 
 
 

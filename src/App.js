@@ -7,6 +7,20 @@ import countriesJsonString from './input/inputDataString';
 
 
 class App extends Component {
+constructor(props){
+  super(props);
+
+  this.state = {
+    selection1: '',
+    selection2: ''
+  }
+}
+
+getResult = (result) => {
+  console.log(result);
+}
+
+
   render() {
     return (
       <div className="App">
@@ -15,18 +29,24 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p></p>
+
+
         <Autocomplete
           searchData = {countriesJsonObj}
           searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
           inputStyle ={{background: 'red'}}
           getFunction = {(data)=> data['name']}
+          result = {this.getResult}
         />
+
+
         <p></p>
        
         <Autocomplete
           searchData = {countriesJsonString}
           searchFunc = {(item,value) => item.toLowerCase().indexOf(value.toLowerCase()) > -1}
           liStyle ={{background: 'red'}}
+          result = {this.getResult}
         />
 
 
